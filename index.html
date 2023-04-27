@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Tableau de bord de voiture</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+	<h1>Tableau de bord de voiture</h1>
+    
+	<div class="container">
+        
+        <div class="panel">
+			<h2>Commande</h2>
+			<button id="start-button">Démarrer la voiture</button>
+            <button id="stop-button">Arrêter la voiture</button>
+            <button id="increase-button">Accélerer</button>
+            <button id="decrease-button">Décélerer</button>
+            <button id="refuel">Refaire le plein</button>
+		</div>
+
+		<div class="panel">
+			<h2>Vitesse</h2>
+			<div class="speedometer">
+				<div class="gauge">
+					<div id="speed-needle" class="needle"></div>
+					<div id="speed-value" class="value">0</div>
+					<div id="units" class="units">km/h</div>
+				</div>
+			</div>
+			<div class="bottom">
+				<p>0</p>
+				<p>220</p>
+			</div>
+		</div>
+
+		<div class="panel">
+            <h2>Régime moteur</h2>
+			<div class="speedometer">
+				<div class="gauge">
+					<div id="rpm-needle" class="needle"></div>
+					<div id="rpm-value" class="value">0</div>
+					<div id="units" class="units">tr/min</div>
+				</div>
+			</div>
+			<div class="bottom">
+				<p>0</p>
+				<p>6000</p>
+			</div>
+        </div>
+
+        <div class="panel">
+            <div class="indicator">
+                <div class="indicator-label">Température</div>
+                <div class="indicator-value" id="temperature-indicator">--</div>
+                <div class="indicator-units">°C</div>
+            </div>
+            <div class="indicator">
+                <div class="indicator-label">Niveau de carburant</div>
+                <div class="indicator-value" id="fuel-indicator">--</div>
+                <div class="indicator-units">L</div>
+            </div>
+            <div class="indicator">
+                <div class="indicator-label">Odomètre</div>
+                <div class="indicator-value" id="km-indicator">0.0</div>
+                <div class="indicator-units">km</div>
+            </div>
+        </div>
+        
+        
+
+        <!-- Script pour la mise à jour des valeurs -->
+        <script src="js/main.js"></script>
+    
+    </body>
+    
+    </html>
+    
