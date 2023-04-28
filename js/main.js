@@ -54,7 +54,7 @@ class voiture {
     }
 
     stopEngine() {
-        if (this.engine) {
+        if (this.engine && this.speed==0) {
             this.engine = false;
             this.temp = this.ambiantTemp;
             this.refreshTemp();
