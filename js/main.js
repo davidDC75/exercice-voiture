@@ -4,7 +4,8 @@ class voiture {
     temp = 15;
     speed = 0;
     rpm = 0;
-    fuel = 100;
+    maxFuel = 100;
+    fuel = this.maxFuel;
     fuelStep = 0;
     odometre = 0;
 
@@ -34,9 +35,9 @@ class voiture {
     constructor() {
         this.refreshTemp();
         this.refreshFuel();
-        this.btnIncreaseSpeed.style.visibility='hidden';
-        this.btnDecreaseSpeed.style.visibility='hidden';
-        this.btnStopEngine.style.visibility='hideen';
+        this.setHidden(this.btnIncreaseSpeed);
+        this.setHidden(this.btnDecreaseSpeed);
+        this.setHidden(this.btnStopEngine);
     }
 
     startEngine() {
@@ -45,16 +46,16 @@ class voiture {
             this.rpm=0;
             this.refreshRegime();
             this.myInterval=setInterval( () => this.intervalEngine(),this.intervalValueMs);
-            this.btnStartEngine.style.visibility='hidden';
-            this.btnRefuel.style.visibility='hidden';
-            this.btnIncreaseSpeed.style.visibility='visible';
-            this.btnDecreaseSpeed.style.visibility='visible';
-            this.btnStopEngine.style.visibility='visible';
+            this.setHidden(this.btnStartEngine);
+            this.setHidden(this.btnRefuel);
+            this.setVisible(this.btnIncreaseSpeed);
+            this.setVisible(this.btnDecreaseSpeed);
+            this.setVisible(this.btnStopEngine);
         }
     }
 
     stopEngine() {
-        if (this.engine && this.speed==0) {
+        if ( (this.engine && this.speed==0) || (this.engine && this.speed>0 && this.fuel<=0)) {
             this.engine = false;
             this.temp = this.ambiantTemp;
             this.refreshTemp();
@@ -68,12 +69,12 @@ class voiture {
             this.rpmNeedle.style.transform = 'rotate(-210deg)';
             this.fuelStep=0;    
             clearInterval(this.myInterval);
-            if (this.fuel>0) this.btnStartEngine.style.visibility='visible';
-            else this.btnStartEngine.style.visibility='hidden';
-            this.btnRefuel.style.visibility='visible';
-            this.btnIncreaseSpeed.style.visibility='hidden';
-            this.btnDecreaseSpeed.style.visibility='hidden';
-            this.btnStopEngine.style.visibility='hidden';
+            if (this.fuel>0) this.setVisible(this.btnStartEngine);
+            else this.setHidden(this.btnStartEngine);
+            this.setVisible(this.btnRefuel);
+            this.setHidden(this.btnIncreaseSpeed);
+            this.setHidden(this.btnDecreaseSpeed);
+            this.setHidden(this.btnStopEngine);
         }
     }
 
@@ -85,6 +86,7 @@ class voiture {
                 this.speedNeedle.style.transform = 'rotate('+this.speedNeedleAngle+'deg)';
                 this.refreshSpeed();
                 this.calculateRpm();
+                this.setHidden(this.btnStopEngine);
             }
         }
     }
@@ -97,6 +99,7 @@ class voiture {
                 this.speedNeedle.style.transform = 'rotate('+this.speedNeedleAngle+'deg)';
                 this.refreshSpeed();
                 this.calculateRpm();
+                if (this.speed==0) this.setVisible(this.btnStopEngine);
             }
         }
     }
@@ -165,9 +168,9 @@ class voiture {
 
     refuel() {
         if (!this.engine) {
-            this.fuel=100;
+            this.fuel=this.maxFuel;
             this.refreshFuel();
-            this.btnStartEngine.style.visibility='visible';
+            this.setVisible(this.btnStartEngine);
         }
     }
 
@@ -195,6 +198,14 @@ class voiture {
     toFixed(n, fractionalDigits) {
         const factor = 10 ** fractionalDigits;
         return Math.round(n*factor)/factor;
+    }
+
+    setHidden(btn) {
+        btn.style.visibility='hidden';
+    }
+
+    setVisible(btn) {
+        btn.style.visibility='visible';
     }
 }
 
