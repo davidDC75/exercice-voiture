@@ -31,8 +31,6 @@ class voiture {
     btnDecreaseSpeed=document.getElementById('decrease-button');
     btnStopEngine=document.getElementById('stop-button');
 
-    
-
     constructor() {
         this.refreshTemp();
         this.refreshFuel();
@@ -68,6 +66,7 @@ class voiture {
             this.refreshRegime();
             this.rpmNeedleAngle=-210;
             this.rpmNeedle.style.transform = 'rotate(-210deg)';
+            this.fuelStep=0;    
             clearInterval(this.myInterval);
             if (this.fuel>0) this.btnStartEngine.style.visibility='visible';
             else this.btnStartEngine.style.visibility='hidden';
