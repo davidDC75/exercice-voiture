@@ -15,7 +15,7 @@ class voiture {
     rpmNeedleAngle = -210;
     rpmNeedleAngleStep = 40;
 
-    intervalValueMs = 2000;
+    intervalValueMs = 1000;
     myInterval = Object;
 
     rpmNeedle = document.getElementById('rpm-needle');
